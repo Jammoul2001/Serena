@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valentine 💖</title>
+
+  <style>
+    body {
+      margin: 0;
+      background: linear-gradient(135deg, #f7cbd6, #ffd6e0);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .card {
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      width: 340px;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.2);
+      z-index: 10;
+    }
+
+    h2 {
+      margin-bottom: 25px;
+      color: #333;
+    }
+
+    button {
+      padding: 12px 24px;
+      border-radius: 30px;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      margin: 10px;
+      transition: transform 0.2s;
+    }
+
+    #yes {
+      background: #ff4d6d;
+      color: white;
+    }
+
+    #yes:hover {
+      transform: scale(1.05);
+    }
+
+    #no {
+      background: #e0e0e0;
+      position: relative;
+    }
+
+    #msg {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #ff4d6d;
+      font-size: 18px;
+    }
+
+    /* ❤️ Herz-Animation */
+    .heart {
+      position: absolute;
+      font-size: 26px;
+      animation: floatUp 3s linear forwards;
+      pointer-events: none;
+    }
+
+    @keyframes floatUp {
+      0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-220px) scale(1.8);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="card">
+    <h2>Serena, will you be my Valentine? 💘</h2>
+    <button id="yes">Yes</button>
+    <button id="no">No</button>
+    <div id="msg"></div>
+  </div>
+
+  <!-- 🔊 Sound -->
+  <audio id="loveSound" preload="auto">
+    <source src="https://www.myinstants.com/media/sounds/cartoon-kiss.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    const noBtn = document.getElementById("no");
+    const yesBtn = document.getElementById("yes");
+    const msg = document.getElementById("msg");
+    const sound = document.getElementById("loveSound");
+
+    // 😈 No-Button flieht
+    noBtn.addEventListener("mouseenter", () => {
+      const x = Math.random() * 240 - 120;
+      const y = Math.random() * 240 - 120;
+      noBtn.style.transform = `translate(${x}px, ${y}px)`;
+    });
+
+    // ❤️ Yes-Button
+    yesBtn.addEventListener("click", () => {
+      msg.textContent = "Yaaay 💖 Best decision ever!";
+      sound.play();
+      createHearts();
+    });
+
+    function createHearts() {
+      for (let i = 0; i < 20; i++) {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.textContent = "❤️";
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.style.bottom = "0px";
+        heart.style.animationDuration = (2 + Math.random() * 2) + "s";
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+          heart.remove();
+        }, 3000);
+      }
+    }
+  </script>
+
+</body>
+</html>
